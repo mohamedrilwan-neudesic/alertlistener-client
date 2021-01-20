@@ -1,5 +1,6 @@
 
-using Chatty.Api.Hubs;
+
+using AMNOne.Services.Notifications.Hub.Hubs;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,7 +33,7 @@ namespace Chatty.Api
                 {
                     policy.AllowAnyHeader()
                         .AllowAnyMethod()
-                        .WithOrigins("http://localhost:3000,http://localhost:3001")
+                        .WithOrigins("http://localhost:3000")
                         .AllowCredentials();
                 });
             });
@@ -57,7 +58,7 @@ namespace Chatty.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<ChatHub>("/hubs/chat");
+                endpoints.MapHub<AlertHub>("/hubs/chat");
             });
         }
     }

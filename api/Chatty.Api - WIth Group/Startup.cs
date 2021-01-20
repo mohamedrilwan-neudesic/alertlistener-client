@@ -32,7 +32,7 @@ namespace Chatty.Api
                 {
                     policy.AllowAnyHeader()
                         .AllowAnyMethod()
-                        .WithOrigins("http://localhost:3000,http://localhost:3001")
+                        .WithOrigins("http://localhost:3000")
                         .AllowCredentials();
                 });
             });

@@ -1,6 +1,8 @@
-﻿using Chatty.Api.Hubs;
-using Chatty.Api.Hubs.Clients;
-using Chatty.Api.Models;
+﻿
+
+using AMNOne.Services.Notifications.Hub;
+using AMNOne.Services.Notifications.Hub.Hubs;
+using AMNOne.Services.Notifications.Hub.Models;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
@@ -13,9 +15,9 @@ namespace Chatty.Api.Controllers
     [Route("[controller]")]
     public class ChatController : ControllerBase
     {
-        private readonly IHubContext<ChatHub, IChatClient> _chatHub;
+        private readonly IHubContext<AlertHub, IAlertClient> _chatHub;
 
-        public ChatController(IHubContext<ChatHub, IChatClient> chatHub)
+        public ChatController(IHubContext<AlertHub, IAlertClient> chatHub)
         {
             _chatHub = chatHub;
         }
@@ -25,7 +27,7 @@ namespace Chatty.Api.Controllers
         {
             // run some logic...    
 
-            await _chatHub.Clients.All.GetMessage(message);
+            await _chatHub.Clients.All.Broadcast(message.User, message.Type, message.Message);
         }
 
         //[HttpPost("messages")]
